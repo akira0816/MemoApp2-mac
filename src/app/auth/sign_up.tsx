@@ -5,23 +5,30 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import Header from "../../components/Header";
+import { Link, router } from "expo-router";
+
 import Button from "../../components/Button";
+
+const handlePress = (): void => {
+  // 会員登録
+  router.push("/memo/list");
+};
 
 const SignUp = (): JSX.Element => {
   return (
     <View style={sytles.container}>
-      <Header />
       <View style={sytles.inner}>
         <Text style={sytles.title}>Sign Up</Text>
         <TextInput style={sytles.input} value="Email adress" />
         <TextInput style={sytles.input} value="Password" />
-        <Button label="Submit" />
+        <Button label="Submit" onPress={handlePress} />
         <View style={sytles.footer}>
           <Text style={sytles.footerText}>Already registered?</Text>
-          <TouchableOpacity>
-            <Text style={sytles.footerLink}>Log In</Text>
-          </TouchableOpacity>
+          <Link href="/auth/log_in" asChild>
+            <TouchableOpacity>
+              <Text style={sytles.footerLink}>Log In</Text>
+            </TouchableOpacity>
+          </Link>
         </View>
       </View>
     </View>
