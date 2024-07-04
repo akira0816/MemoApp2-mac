@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import { useState } from "react";
 import { Link, router } from "expo-router";
 
 import Button from "../../components/Button";
@@ -15,16 +16,38 @@ const handlePress = (): void => {
 };
 
 const LogIn = (): JSX.Element => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <View style={sytles.container}>
       <View style={sytles.inner}>
         <Text style={sytles.title}>Log In</Text>
-        <TextInput style={sytles.input} value="Email adress" />
-        <TextInput style={sytles.input} value="Password" />
+        <TextInput
+          style={sytles.input}
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email Address"
+          textContentType="emailAddress"
+        />
+        <TextInput
+          style={sytles.input}
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+          autoCapitalize="none"
+          secureTextEntry
+          placeholder="Password"
+          textContentType="password"
+        />
         <Button label="Submit" onPress={handlePress} />
         <View style={sytles.footer}>
           <Text style={sytles.footerText}>Not registered?</Text>
-          <Link href="/auth/sign_up" asChild>
+          <Link href="/auth/sign_up" asChild replace>
             <TouchableOpacity>
               <Text style={sytles.footerLink}>Sign up here!</Text>
             </TouchableOpacity>
